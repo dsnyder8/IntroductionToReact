@@ -1,11 +1,34 @@
-import {React} from 'react';
+import React, { useState } from 'react';
 
 
 
 function Body(){
+    //need to specify the htmlFor attribute instead of for because for is a reserved word in javascript, so we have to use htmlFor instead  
+    const [task, setTask] = useState('');
+    const [description, setDescription] = useState('');
+    const [priority, setPriority] = useState('1');
+
+    function handleAddTask(e){
+        //prevents default form submission behavior, which would cause the page to reload 
+        e.preventDefault();
+        if(task.trim() ==" "){
+            alert("Please enter a task");
+            return;
+        }
+        const newTask = {
+            id: Date.now(),
+            name: taskName,
+            text: taskDescription,
+            priority: taskPriority,
+            completed: false,
+        };
+       setTask('');
+       setDescription('');
+       setPriority('1');
+    }
+
 
     return(
-        //need to specify the htmlFor attribute instead of for because for is a reserved word in javascript, so we have to use htmlFor instead  
         <>
         <label htmlFor = "task"> Task Name:</label>
         <input type="text" placeholder = "Enter a Task"/>
@@ -21,7 +44,7 @@ function Body(){
 
         </select>
        
-        <button type="submit">Add Task</button>
+        <button type="submit" onClick = {handleAddTask}>Add Task</button>
 
         <div className="task-boxes">
             <div className="current-task-box">
