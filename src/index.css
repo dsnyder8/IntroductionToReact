@@ -11,8 +11,8 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -110,98 +110,134 @@ code {
   background: var(--code-bg);
 }
 
-
 /* --- TOP FORM ELEMENTS --- */
 /* Since your top inputs aren't wrapped in a div, we will style the tags directly */
 label {
-    display: block; /* Puts the label on its own line */
-    margin-top: 15px;
-    font-weight: bold;
-    color: #444;
+  display: block; /* Puts the label on its own line */
+  margin-top: 15px;
+  font-weight: bold;
+  color: #444;
 }
 
-input, select {
-    width: 100%;
-    max-width: 400px; /* Prevents inputs from stretching across the whole screen */
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; /* Ensures padding doesn't mess up width */
+input,
+select {
+  width: 100%;
+  max-width: 400px; /* Prevents inputs from stretching across the whole screen */
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensures padding doesn't mess up width */
 }
 
 button[type="submit"] {
-    display: block;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-
-/* This is the master wrapper holding BOTH big white boxes */
-.task-boxes {
-  display: flex;
-  flex-direction: row; /* This is the magic line that puts them side-by-side */
-  gap: 20px; /* The space between the left column and right column */
-  align-items: flex-start; /* Keeps the boxes aligned at the top even if one list gets longer */
+  display: block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
   margin-top: 20px;
 }
 
-/* This styles the two main columns to look like large white boxes */
-.current-task-box, 
-.completed-task-box {
-  flex: 1; /* Keeps them sharing the screen 50/50 */
-  background-color: white; /* Puts the white box back! */
-  padding: 20px; /* Adds breathing room inside the box so the text doesn't touch the edges */
-  border-radius: 8px; /* Gives the boxes nice rounded corners */
-  color: black; /* Ensures the text inside the white box is readable */
+button[type="submit"]:hover {
+  background-color: #0056b3;
 }
 
-.current-task-box h2, 
+/* =========================================
+   MASTER LAYOUT (The two big white columns)
+   ========================================= */
+.task-boxes {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.current-task-box,
+.completed-task-box {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  color: black;
+}
+
+.current-task-box h2,
 .completed-task-box h2 {
-  color: #1a1a1a; /* This forces the text to be a highly readable dark gray/black */
+  color: #1a1a1a;
   margin-top: 0;
   text-align: center;
 }
-/* The buttons inside your tasks */
-.task-options {
-    display: flex;
-    gap: 10px; /* Space between the buttons */
-    margin-top: 15px;
-    padding: 15px;
-    background-color: white; /* Makes the specific task stand out against the gray box */
-    border: 1px solid #eee;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
 
-.task-options button {
-    padding: 6px 12px;
-    display: flex;
-    align-items: flex-start;
-    border: 1px solid #ccc;
-    background-color: black;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.task-options button:hover {
-    background-color: #eaeaea;
-}
-
+/* =========================================
+   INSIDE THE COLUMNS (Stacking the tasks)
+   ========================================= */
 .task-list {
   display: flex;
-  flex-direction: column; /* This forces the individual tasks to stack downwards! */
-  gap: 15px; /* Adds some nice breathing room between each task */
-  margin-top: 15px; /* Gives a little space below your underlined header */
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* =========================================
+   BUTTON STYLING
+   ========================================= */
+.task-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end; /* Pushes the buttons to the far right edge */
+}
+
+.task-actions button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background-color: black;
+  color: white; /* Make sure the text is visible! */
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+  white-space: nowrap; /* Stops button text from splitting onto two lines */
+}
+
+.task-actions button:hover {
+  background-color: #333;
+}
+
+/* =========================================
+   TABLE HEADER
+   ========================================= */
+.task-header {
+  display: grid;
+  /* Changed 'auto' to '160px' */
+  grid-template-columns: 1fr 2fr 85px 160px;
+  gap: 15px;
+
+  padding: 0 15px 10px 15px;
+  font-weight: bold;
+  color: #555;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 5px;
+  text-align: left; /* Forces the header titles to the left edge of their column */
+}
+
+/* =========================================
+   INDIVIDUAL TASKS
+   ========================================= */
+.task-item {
+  display: grid;
+  /* MUST MATCH THE HEADER EXACTLY */
+  grid-template-columns: 1fr 2fr 85px 160px;
+  align-items: center;
+  gap: 15px;
+
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: left; /* Forces the task data to the left edge of its column */
 }

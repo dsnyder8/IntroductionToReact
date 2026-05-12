@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import './index.css';
+import "./index.css";
 function Body() {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -24,8 +24,9 @@ function Body() {
       description: taskDescription,
       priority: taskPriority,
       completed: false,
+      timeCompleted: null,
     };
-
+    //this is where id add the sorting logic??
     setTasks([...tasks, newTask]);
 
     setTaskName("");
@@ -37,11 +38,14 @@ function Body() {
     setTasks(updatedTasks);
   }
 
-
   function handleTaskCompletion(id) {
     const completedTasks = tasks.map((singleTask) => {
       if (singleTask.id === id) {
-        return { ...singleTask, completed: !singleTask.completed };
+        return {
+          ...singleTask,
+          completed: !singleTask.completed,
+          timeCompleted: Date.now(),
+        };
       }
 
       return singleTask;
@@ -86,26 +90,45 @@ function Body() {
         Add Task
       </button>
 
-      
-
       <div className="task-boxes">
         <div className="current-task-box">
           <h2>
             <u>Current Tasks</u>
           </h2>
           <div className="task-list">
+            <div className="task-header">
+              <div>Task</div>
+              <div>Description</div>
+              <div>Priority</div>
+              <div></div>
+            </div>
             {tasks
               .filter((singleTask) => singleTask.completed === false)
-            .map((singleTask) => (
-              <div key={singleTask.id} className="task-options">
-                <strong>{singleTask.name}</strong> - {singleTask.description}{" "}
-                (Priority: {singleTask.priority})
-                
-                <button onClick={() => handleTaskCompletion(singleTask.id)}> Completed</button>
-              
-                <button onClick={() => handleDelete(singleTask.id)}> Delete</button>
-              </div>
-            ))}
+              .sort((a, b) => b.priority - a.priority)
+              .map((singleTask) => (
+                <div key={singleTask.id} className="task-item">
+                  {/* Column 1: Name */}
+                  <div className="task-name">
+                    <strong>{singleTask.name}</strong>
+                  </div>
+
+                  {/* Column 2: Description */}
+                  <div className="task-desc">{singleTask.description}</div>
+
+                  {/* Column 3: Priority */}
+                  <div className="task-pri">{singleTask.priority}</div>
+
+                  {/* Column 4: The Buttons */}
+                  <div className="task-actions">
+                    <button onClick={() => handleTaskCompletion(singleTask.id)}>
+                      Completed
+                    </button>
+                    <button onClick={() => handleDelete(singleTask.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
 
@@ -113,15 +136,34 @@ function Body() {
           <h2>
             <u>Completed Tasks</u>
           </h2>
-          <div className="task-options">
+          <div className="task-list">
+            <div className="task-header">
+              <div>Task</div>
+              <div>Description</div>
+              <div>Priority</div>
+              <div></div>
+            </div>
             {tasks
               .filter((singleTask) => singleTask.completed === true)
+              .sort((a, b) => b.timeCompleted - a.timeCompleted)
               .map((singleTask) => (
-                <div key={singleTask.id} className="task-options">
-                  <strong>{singleTask.name}</strong> - {singleTask.description}{" "}
-                  (Priority: {singleTask.priority})
-                  
-                  <button onClick={() => handleDelete(singleTask.id)}> Delete</button>
+                <div key={singleTask.id} className="task-item">
+                  <div className="task-name">
+                    <strong>{singleTask.name}</strong>
+                  </div>
+                  <div className="task-desc">{singleTask.description}</div>
+                  <div className="task-pri">
+                    Priority: {singleTask.priority}
+                  </div>
+
+                  <div className="task-actions">
+                    <button onClick={() => handleTaskCompletion(singleTask.id)}>
+                      Undo
+                    </button>
+                    <button onClick={() => handleDelete(singleTask.id)}>
+                      Delete
+                    </button>
+                  </div>
                 </div>
               ))}
           </div>
