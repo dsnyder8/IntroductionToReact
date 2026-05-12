@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-=======
 import { React, useState } from "react";
->>>>>>> 7126e7e8b0f69cf0b4fcab4c21154d393b986157
-
+import './index.css';
 function Body() {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -17,51 +13,6 @@ function Body() {
       return;
     }
 
-<<<<<<< HEAD
-function Body(){
-    //need to specify the htmlFor attribute instead of for because for is a reserved word in javascript, so we have to use htmlFor instead  
-    const [task, setTask] = useState('');
-    const [description, setDescription] = useState('');
-    const [priority, setPriority] = useState('1');
-
-    function handleAddTask(e){
-        //prevents default form submission behavior, which would cause the page to reload 
-        e.preventDefault();
-        if(task.trim() ==" "){
-            alert("Please enter a task");
-            return;
-        }
-        const newTask = {
-            id: Date.now(),
-            name: taskName,
-            text: taskDescription,
-            priority: taskPriority,
-            completed: false,
-        };
-       setTask('');
-       setDescription('');
-       setPriority('1');
-    }
-
-
-    return(
-        <>
-        <label htmlFor = "task"> Task Name:</label>
-        <input type="text" placeholder = "Enter a Task"/>
-        <label htmlFor = "description"> Task Description:</label>
-        <input type="text" placeholder = "Describe your task"/> 
-        <label htmlFor = "priority"> Task Priority:</label>
-        <select name="priority" id="priority">
-            <option value ="1">1 - Lowest Priority</option>
-            <option value ="2">2 </option>
-            <option value ="3">3</option>
-            <option value ="4">4</option>
-            <option value ="5">5 - Highest Priority</option>
-
-        </select>
-       
-        <button type="submit" onClick = {handleAddTask}>Add Task</button>
-=======
     if (taskDescription === "" || taskDescription.trim() === "") {
       alert("Please add a short description for your task");
       return;
@@ -85,20 +36,18 @@ function Body(){
     const updatedTasks = tasks.filter((tasksToStay) => tasksToStay.id !== id);
     setTasks(updatedTasks);
   }
->>>>>>> 7126e7e8b0f69cf0b4fcab4c21154d393b986157
 
-  function handleEditTask(task) {}
 
-  function handleTaskCompletion(task) {
-    const completedTasks = tasks.map((completedTask) => {
-      if (completedTask.id === id) {
+  function handleTaskCompletion(id) {
+    const completedTasks = tasks.map((singleTask) => {
+      if (singleTask.id === id) {
         return { ...singleTask, completed: !singleTask.completed };
       }
 
       return singleTask;
     });
 
-    setTasks(updatedTasks);
+    setTasks(completedTasks);
   }
   return (
     //need to specify the htmlFor attribute instead of for because for is a reserved word in javascript, so we have to use htmlFor instead
@@ -137,24 +86,26 @@ function Body(){
         Add Task
       </button>
 
-      <hr />
+      
 
       <div className="task-boxes">
         <div className="current-task-box">
           <h2>
             <u>Current Tasks</u>
           </h2>
-          <div className="task-options">
-            {tasks.map((singleTask) => (
+          <div className="task-list">
+            {tasks
+              .filter((singleTask) => singleTask.completed === false)
+            .map((singleTask) => (
               <div key={singleTask.id} className="task-options">
                 <strong>{singleTask.name}</strong> - {singleTask.description}{" "}
                 (Priority: {singleTask.priority})
+                
+                <button onClick={() => handleTaskCompletion(singleTask.id)}> Completed</button>
+              
+                <button onClick={() => handleDelete(singleTask.id)}> Delete</button>
               </div>
             ))}
-
-            <button> Completed</button>
-            <button> Edit</button>
-            <button onClick={() => handleDelete(singleTask.id)}> Delete</button>
           </div>
         </div>
 
@@ -163,8 +114,16 @@ function Body(){
             <u>Completed Tasks</u>
           </h2>
           <div className="task-options">
-            <button> Edit</button>
-            <button> Delete</button>
+            {tasks
+              .filter((singleTask) => singleTask.completed === true)
+              .map((singleTask) => (
+                <div key={singleTask.id} className="task-options">
+                  <strong>{singleTask.name}</strong> - {singleTask.description}{" "}
+                  (Priority: {singleTask.priority})
+                  
+                  <button onClick={() => handleDelete(singleTask.id)}> Delete</button>
+                </div>
+              ))}
           </div>
         </div>
       </div>

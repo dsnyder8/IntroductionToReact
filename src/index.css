@@ -147,32 +147,31 @@ button[type="submit"]:hover {
 }
 
 
-/* --- BOTTOM TASK BOXES --- */
-
-/* The main container holding both boxes */
+/* This is the master wrapper holding BOTH big white boxes */
 .task-boxes {
-    display: flex;
-    justify-content: space-between; /* Puts space between the boxes */
-    gap: 20px; /* Forces at least 20px gap */
-    margin-top: 40px; 
+  display: flex;
+  flex-direction: row; /* This is the magic line that puts them side-by-side */
+  gap: 20px; /* The space between the left column and right column */
+  align-items: flex-start; /* Keeps the boxes aligned at the top even if one list gets longer */
+  margin-top: 20px;
 }
 
-/* The individual columns */
+/* This styles the two main columns to look like large white boxes */
 .current-task-box, 
 .completed-task-box {
-    flex: 1; /* Makes both columns take up exactly half the space */
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+  flex: 1; /* Keeps them sharing the screen 50/50 */
+  background-color: white; /* Puts the white box back! */
+  padding: 20px; /* Adds breathing room inside the box so the text doesn't touch the edges */
+  border-radius: 8px; /* Gives the boxes nice rounded corners */
+  color: black; /* Ensures the text inside the white box is readable */
 }
 
 .current-task-box h2, 
 .completed-task-box h2 {
-    margin-top: 0;
-    color: #333;
+  color: #1a1a1a; /* This forces the text to be a highly readable dark gray/black */
+  margin-top: 0;
+  text-align: center;
 }
-
 /* The buttons inside your tasks */
 .task-options {
     display: flex;
@@ -187,6 +186,8 @@ button[type="submit"]:hover {
 
 .task-options button {
     padding: 6px 12px;
+    display: flex;
+    align-items: flex-start;
     border: 1px solid #ccc;
     background-color: black;
     cursor: pointer;
@@ -196,4 +197,11 @@ button[type="submit"]:hover {
 
 .task-options button:hover {
     background-color: #eaeaea;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column; /* This forces the individual tasks to stack downwards! */
+  gap: 15px; /* Adds some nice breathing room between each task */
+  margin-top: 15px; /* Gives a little space below your underlined header */
 }
