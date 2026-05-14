@@ -5,16 +5,17 @@ function Body() {
   const [taskDescription, setTaskDescription] = useState("");
   const [taskPriority, setTaskPriority] = useState("1");
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState("");
 
   function handleAddEvent(event) {
     event.preventDefault();
-    if (taskName === "" || taskName.trim() === "") {
-      alert("Please add a name for your task");
+    if (taskName.trim() === "") {
+      setError("Please add a name for your task.");
       return;
     }
 
-    if (taskDescription === "" || taskDescription.trim() === "") {
-      alert("Please add a short description for your task");
+    if (taskDescription.trim() === "") {
+      setError("Please add a short description for your task.");
       return;
     }
     // finish functionality
@@ -32,6 +33,7 @@ function Body() {
     setTaskName("");
     setTaskDescription("");
     setTaskPriority("1");
+    setError("");
   }
   function handleDelete(id) {
     const updatedTasks = tasks.filter((tasksToStay) => tasksToStay.id !== id);
@@ -88,6 +90,7 @@ function Body() {
         </select>
 
         <button type="submit">Add Task</button>
+        {error && <p className="form-error">{error}</p>}
       </form>
 
       <div className="task-boxes">
