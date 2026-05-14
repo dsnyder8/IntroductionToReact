@@ -247,3 +247,8 @@ button[type="submit"]:hover {
   font-style: italic;
   padding: 10px 0;
 }
+
+.form-error {
+  color: #c00;
+  margin-top: 10px;
+}
