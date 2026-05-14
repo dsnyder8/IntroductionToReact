@@ -1,16 +1,53 @@
-# React + Vite
+# React Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple task manager demo built with React to showcase the framework's core features for CISC 375.
 
-Currently, two official plugins are available:
+## Framework Information
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Name and version:** React 19.2 (with Vite 8 as the build tool)
+- **Official documentation:** https://react.dev/
 
-## React Compiler
+## Setup Instructions
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Prerequisites:** Node.js 20 or newer.
 
-## Expanding the ESLint configuration
+**Installation:**
+```
+git clone https://github.com/dsnyder8/IntroductionToReact.git
+cd IntroductionToReact
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Run the demo:**
+```
+npm run dev
+```
+Then open the URL Vite prints (defaults to http://localhost:5173).
+
+## Features Implemented
+
+- [x] Display tasks
+- [x] Add task
+- [x] Mark complete
+- [x] Delete task
+
+## What We Learned
+
+- **Components and JSX:** splitting the UI into `Header` and `Body` components and composing them in `App`.
+- **`useState` hooks:** managing form fields and the task list as React state instead of mutating the DOM directly.
+- **Controlled inputs:** binding each `<input>` to state via `value` and `onChange`.
+- **Immutable list updates:** using `[...tasks, newTask]`, `.filter`, and `.map` rather than mutating the array.
+- **List rendering with keys:** assigning each task a stable `id` so React can reconcile the list efficiently.
+
+## Group Contributions
+
+- **Dakota Snyder:** Built the demo from scratch with Vite + React 19. Wrote the `Body` component with add/complete/delete handlers and the sorting logic (current tasks by priority, completed tasks by completion time).
+- **Josh Dunlap:** Reviewed the demo against the rubric and wrote this README. Polished the UI for the live demo: real `<form>` element with inline validation in place of `alert()`, empty-state messages, and small consistency cleanups.
+- **Luke Jordan:** Framework research and presentation slide content.
+- **Brady Sahr:** Framework research and presentation slide content.
+
+## Resources Used
+
+- Meta Platforms, Inc. 2026. *React Documentation*. Retrieved from https://react.dev/learn
+- Meta Platforms, Inc. 2026. *useState: React Reference*. Retrieved from https://react.dev/reference/react/useState
+- Vite. 2026. *Getting Started*. Retrieved from https://vite.dev/guide/
