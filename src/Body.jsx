@@ -129,6 +129,9 @@ function Body() {
                   </div>
                 </div>
               ))}
+            {tasks.filter((t) => !t.completed).length === 0 && (
+              <p className="empty-state">No tasks yet — add one above.</p>
+            )}
           </div>
         </div>
 
@@ -166,6 +169,9 @@ function Body() {
                   </div>
                 </div>
               ))}
+            {tasks.filter((t) => t.completed).length === 0 && (
+              <p className="empty-state">Nothing completed yet.</p>
+            )}
           </div>
         </div>
       </div>

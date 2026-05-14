@@ -241,3 +241,9 @@ button[type="submit"]:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   text-align: left; /* Forces the task data to the left edge of its column */
 }
+
+.empty-state {
+  color: #888;
+  font-style: italic;
+  padding: 10px 0;
+}
