@@ -158,9 +158,7 @@ function Body() {
                     <strong>{singleTask.name}</strong>
                   </div>
                   <div className="task-desc">{singleTask.description}</div>
-                  <div className="task-pri">
-                    Priority: {singleTask.priority}
-                  </div>
+                  <div className="task-pri">{singleTask.priority}</div>
 
                   <div className="task-actions">
                     <button onClick={() => handleTaskCompletion(singleTask.id)}>
