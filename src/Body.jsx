@@ -56,39 +56,39 @@ function Body() {
   return (
     //need to specify the htmlFor attribute instead of for because for is a reserved word in javascript, so we have to use htmlFor instead
     <>
-      <label htmlFor="task"> Task Name:</label>
-      <input
-        type="text"
-        placeholder="Enter a Task"
-        value={taskName}
-        onChange={(e) => setTaskName(e.target.value)}
-      />
+      <form onSubmit={handleAddEvent}>
+        <label htmlFor="task"> Task Name:</label>
+        <input
+          type="text"
+          placeholder="Enter a Task"
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+        />
 
-      <label htmlFor="description"> Task Description:</label>
-      <input
-        type="text"
-        placeholder="Describe your task"
-        value={taskDescription}
-        onChange={(e) => setTaskDescription(e.target.value)}
-      />
+        <label htmlFor="description"> Task Description:</label>
+        <input
+          type="text"
+          placeholder="Describe your task"
+          value={taskDescription}
+          onChange={(e) => setTaskDescription(e.target.value)}
+        />
 
-      <label htmlFor="priority"> Task Priority:</label>
-      <select
-        name="priority"
-        id="priority"
-        value={taskPriority}
-        onChange={(e) => setTaskPriority(e.target.value)}
-      >
-        <option value="1">1 - Lowest Priority</option>
-        <option value="2">2 </option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5 - Highest Priority</option>
-      </select>
+        <label htmlFor="priority"> Task Priority:</label>
+        <select
+          name="priority"
+          id="priority"
+          value={taskPriority}
+          onChange={(e) => setTaskPriority(e.target.value)}
+        >
+          <option value="1">1 - Lowest Priority</option>
+          <option value="2">2 </option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 - Highest Priority</option>
+        </select>
 
-      <button type="submit" onClick={handleAddEvent}>
-        Add Task
-      </button>
+        <button type="submit">Add Task</button>
+      </form>
 
       <div className="task-boxes">
         <div className="current-task-box">
